@@ -58,13 +58,9 @@ gulp.task('clean', function() {
 * Jade related tasks
 *******************************************************************************/
 gulp.task('jade', function() {
-  return gulp.src([src.jade, 
-      '!src/**/header.jade', 
-      '!src/**/footer.jade',
-      '!src/**/scripts.jade'])
+  return gulp.src([src.jade])
     .pipe(plugins.plumber())
-    .pipe(plugins.changed(dist.base))
-    .pipe(plugins.jade({pretty: true}))
+    .pipe(plugins.jade())
     .pipe(gulp.dest(dist.base))
     .pipe(browserSync.stream())
 });
@@ -82,10 +78,9 @@ gulp.task('sass', function() {
       '> 2%',
       'ie >= 10']))
     .pipe(plugins.csscomb())
-    .pipe(plugins.sourcemaps.write('./'))
-    .pipe(gulp.dest(dist.scss))
     .pipe(plugins.rename({suffix: '.min'}))
-//    .pipe(plugins.cssnano())
+    .pipe(plugins.cssnano())
+    .pipe(plugins.sourcemaps.write('./'))
     .pipe(gulp.dest(dist.scss))
     .pipe(browserSync.stream())
 });
@@ -121,8 +116,6 @@ gulp.task('images', function() {
 gulp.task('scripts', function() {
   return gulp.src([src.scripts])
     .pipe(plugins.plumber())
-//    .pipe(plugins.jshint())
-//    .pipe(plugins.jshint.reporter('jshint-stylish'))
     .pipe(gulp.dest(dist.scripts))
     .pipe(plugins.rename({suffix: '.min'}))
     .pipe(plugins.uglify())
@@ -148,15 +141,15 @@ gulp.task('ui-tests', function () {
 /*******************************************************************************
 * Main tasks
 *******************************************************************************/
-gulp.task('build', function(done) {
+gulp.task('build', function() {
   return runSequence(
     'clean',
     'fonts',
     'images',
     'jade',
     'sass',
-    'scripts',
-    done);
+    'scripts'
+    );
 });
 
 // Watch Related Tasks

@@ -1,4 +1,3 @@
-// var api = fetch( 'http://private-6cb65-natuecart.apiary-mock.com/cart' );
 var actualPage = 0;
 var button = document.getElementsByTagName('button');
 
@@ -62,11 +61,8 @@ function lazyImageLoader () {
   var lazyImage = document.querySelectorAll('img[data-src]');
 
   for (var i = 0; i < lazyImage.length; i++) {
-    // var boundaries = lazyImage[i].getBoundingClientRect();
-    // if (boundaries.top > 0 && boundaries.top < document.body.offsetHeight) {
-      lazyImage[i].setAttribute( 'src', lazyImage[i].dataset.src );
-      lazyImage[i].removeAttribute('data-src');
-    // }
+    lazyImage[i].setAttribute( 'src', lazyImage[i].dataset.src );
+    lazyImage[i].removeAttribute('data-src');
   };
 };
 
