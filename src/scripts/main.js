@@ -1,5 +1,5 @@
 var actualPage = 0;
-var button = document.getElementsByTagName('button');
+var button = document.getElementsByTagName('span');
 
 function checkStatus( response ) {
   'use strict';

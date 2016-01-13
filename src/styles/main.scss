@@ -1,5 +1,9 @@
+/*******************************************************************************
+    $MOBILE FIRST
+*******************************************************************************/
 body {
   background-color: #1c181f;
+  font: 16px/20px normal Helvetica, Arial, sans-serif;
 }
 
 #main {
@@ -7,12 +11,58 @@ body {
   margin: 0 auto;
 }
 
-a {
+img {
+  width: 100%;
   float: left;
   margin: 10px 0;
 }
 
-img {
-  width: 100%;
+span {
+  margin-left: 5%;
+  width: 90%;
+  margin: 15px auto;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 7px 0;
   float: left;
+  cursor: pointer;
+  color: #eee;
+  text-align: center;
+
+  &:hover {
+    color: #000;
+    border-color: #000;
+    background-color: #eee;
+  }
+}
+
+
+/*******************************************************************************
+    $SMALL DEVICES
+*******************************************************************************/
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .container { 
+    width: 750px; 
+    margin: 0 auto;
+  }
+}
+
+/*******************************************************************************
+    $MEDIUM DEVICES
+*******************************************************************************/
+@media screen and (min-width: 993px) and (max-width: 1199px) {
+  .container { 
+    width: 970px; 
+    margin: 0 auto;
+  }
+}
+
+/*******************************************************************************
+    $LARGE DEVICES
+*******************************************************************************/
+@media screen and (min-width: 1200px) {
+  .container {
+    width: 1170px; 
+    margin: 0 auto;
+  }
 }
