@@ -6,6 +6,7 @@
   "author": "Gutem",
   "license": "ISC",
   "devDependencies": {
+    "bower": "^1.7.2",
     "browser-sync": "^2.11.0",
     "chai": "^3.4.1",
     "del": "^2.2.0",

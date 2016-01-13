@@ -1,0 +1,27 @@
+{
+  "name": "fetch_api",
+  "description": "Fetch API demo",
+  "main": "/dist/index.html",
+  "authors": [
+    "Gutem"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "fetch",
+    "API"
+  ],
+  "homepage": "https://github.com/Gutem/fetch_api",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fetch": "~0.10.1",
+    "es6-promise": "~3.0.2"
+  }
+}
