@@ -1,0 +1,7 @@
+section#main
+    .shot( ng-repeat="item in pop_shots" )
+        a(href='#shot/{{ item.id }}')
+            img( src='{{ item.images.normal }}' )
+
+        p.shot__title {{ item.title }}
+button( ng-click='listShots()' ) Ver mais
