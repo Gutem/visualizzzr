@@ -30,9 +30,6 @@ app.controller( 'MainCtrl', function( $scope, $http, $rootScope ) {
 
     if ( $rootScope.pop_shots === undefined || $rootScope.pop_shots.length === 0 ) {
       $rootScope.pop_shots = [];
-      console.log( 'Vazio');
-    } else {
-      console.log( 'Temos algo' );
     }
 
     $http({
@@ -40,9 +37,9 @@ app.controller( 'MainCtrl', function( $scope, $http, $rootScope ) {
       url: $rootScope.API_URL + 'shots/' + '?page=' + $rootScope.actualPage + '&access_token=' + $rootScope.CLIENT_TOKEN
     }).then( function successCallback( response ) {
 
-      let res = response.data;
+      var res = response.data;
 
-      for ( let i = 0, items = res.length; i < items; i++ ) {
+      for ( var i = 0, items = res.length; i < items; i++ ) {
         $rootScope.pop_shots.push( res[ i ] );
       }
       // return response.data;
@@ -54,7 +51,7 @@ app.controller( 'MainCtrl', function( $scope, $http, $rootScope ) {
       console.log( 'request failed', error );
     });
   }
-  
+
   $scope.listShots();
 });
 
