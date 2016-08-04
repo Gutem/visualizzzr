@@ -129,9 +129,6 @@ gulp.task( 'scripts', function() {
   return gulp.src( [ src.scripts ] )
     .pipe( plugins.plumber() )
     .pipe( gulp.dest( dist.scripts ) )
-    // .pipe( plugins.rename( { suffix: '.min' } ) )
-    // .pipe( plugins.uglify() )
-    // .pipe( gulp.dest( dist.scripts ) )
     .pipe( browserSync.stream() )
 });
 
