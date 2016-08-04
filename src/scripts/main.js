@@ -1,70 +1,81 @@
-var actualPage = 0;
-var button = document.getElementsByTagName('span');
+var app = angular.module( 'dribbble', [ 'ngRoute', 'ngSanitize' ] );
 
-function checkStatus( response ) {
-  'use strict';
-  if ( response.status >= 200 && response.status <= 300 ) {
-    return response;
-  } else {
-    var error = new Error( response.statusText )
-    error.response = response
-    throw error
-  }
-}
+app.config( function( $routeProvider ) {
+  $routeProvider
+  .when('/', {
+    templateUrl: 'page.html',
+    controller: 'MainCtrl'
+  })
+   .when('/shot/:shot_id', {
+    templateUrl: 'info.html',
+    controller: 'SecondCtrl'
+  })
+  .otherwise({
+    redirectTo: "/"
+  });
+});
 
-function parseJSON( response ) {
-  'use strict';
-  return response.json()
-}
+app.controller( 'MainCtrl', function( $scope, $http, $rootScope ) {
+  $rootScope.CLIENT_TOKEN = '9a8cd815163e5e68aa4ab4a9be9519c54f851ec2de320e365dc5e591fbfc95fd';
+  $rootScope.API_URL = 'https://api.dribbble.com/v1/';
 
-function insertPhoto( json ) {
-  'use strict';
-  var response = json.photos.photo;
+  $scope.listShots = function() {
+    'use strict';
 
-  for ( var i = 0; i < response.length; i++ ) {
-    var res = response[i];
-    var photoURL = 'https://farm' + res.farm + '.staticflickr.com/' + res.server + '/' + res.id + '_' + res.secret + '_c.jpg';
-    var pageURL = 'https://www.flickr.com/photos/' + res.owner + '/' + res.id;
+    if ( $rootScope.actualPage === undefined ) {
+      $rootScope.actualPage = 0;
+    }
 
-    var main = document.getElementById('main');
+    $rootScope.actualPage += 1;
 
-    var image = document.createElement('img');
-    image.dataset.src = photoURL;
+    if ( $rootScope.pop_shots === undefined || $rootScope.pop_shots.length === 0 ) {
+      $rootScope.pop_shots = [];
+      console.log( 'Vazio');
+    } else {
+      console.log( 'Temos algo' );
+    }
 
-    var link = document.createElement('a');
-    link.href = pageURL;
-    link.target = '_blank';
-    link.appendChild( image );
-    main.appendChild( link );
-  };
-}
+    $http({
+      method: 'GET',
+      url: $rootScope.API_URL + 'shots/' + '?page=' + $rootScope.actualPage + '&access_token=' + $rootScope.CLIENT_TOKEN
+    }).then( function successCallback( response ) {
 
-function apiRequest () {
-  actualPage += 1;
-  apiCall( actualPage );
-}
+      let res = response.data;
 
-function apiCall ( page ) {
-  var api = fetch( 'https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=1ffb7cd5bf02d184a4695641e21e634f&per_page=10&page=' + actualPage + '&format=json&nojsoncallback=1' );
-
-  api.then( checkStatus )
-    .then( parseJSON )
-    .then( insertPhoto )
-    .then( lazyImageLoader )
+      for ( let i = 0, items = res.length; i < items; i++ ) {
+        $rootScope.pop_shots.push( res[ i ] );
+      }
+      // return response.data;
+    }, function errorCallback( response ) {
+      console.log( response );
+    })
+    // .then( lazyImageLoader )
     .catch( function( error ) {
       console.log( 'request failed', error );
+    });
+  }
+  
+  $scope.listShots();
+});
+
+app.controller( 'SecondCtrl', function( $scope, $http, $routeParams, $rootScope ) {
+  $scope.shotInfo = function() {
+    'use strict';
+
+    $http({
+      method: 'GET',
+      url: $rootScope.API_URL + 'shots/' + $routeParams.shot_id + '?access_token=' + $rootScope.CLIENT_TOKEN
+    }).then( function successCallback( response ) {
+      $scope.shot = response.data;
+      // return response.data;
+    }, function errorCallback( response ) {
+      console.log( response );
     })
-}
+    // .then( lazyImageLoader )
+    .catch( function( error ) {
+      console.log( 'request failed', error );
+    });
+  }
 
-function lazyImageLoader () {
-  'use strict';
-  var lazyImage = document.querySelectorAll('img[data-src]');
-
-  for (var i = 0; i < lazyImage.length; i++) {
-    lazyImage[i].setAttribute( 'src', lazyImage[i].dataset.src );
-    lazyImage[i].removeAttribute('data-src');
-  };
-};
-
-button[0].addEventListener( 'click', apiRequest, false );
-
+  $scope.shotInfo();
+});
