@@ -1,15 +1,14 @@
 doctype html
-html
+html(ng-app="dribbble")
   head
-    title Fetch API
+    title Visualizzzr
 
-    link(href="styles/main.min.css" rel="stylesheet" type="text/css")
+    link( href="styles/main.min.css" rel="stylesheet" type="text/css" )
+    script( src="scripts/angular/angular.min.js" )
   
-  body
-    .container
-        section#main
-        span Ver mais
+  body.container
+    ng-view
 
-    script(src="../bower_components/es6-promise/promise.js")
-    script(src="../bower_components/fetch/fetch.js")
-    script(src="scripts/main.min.js")
+    script( src="scripts/angular-route/angular-route.min.js" )
+    script( src="scripts/angular-sanitize/angular-sanitize.min.js" )
+    script( src="scripts/main.js" )
