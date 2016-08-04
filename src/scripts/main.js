@@ -17,7 +17,11 @@ app.config( function( $routeProvider ) {
 
 app.controller( 'MainCtrl', function( $scope, $http, $rootScope ) {
   $rootScope.CLIENT_TOKEN = '9a8cd815163e5e68aa4ab4a9be9519c54f851ec2de320e365dc5e591fbfc95fd';
-  $rootScope.API_URL = 'https://api.dribbble.com/v1/';
+  $rootScope.API_URL = 'https://api.dribbble.com/v1/';  
+
+  if ( $rootScope.pop_shots === undefined ) {
+    $rootScope.pop_shots = [];
+  }
 
   $scope.listShots = function() {
     'use strict';
@@ -27,10 +31,6 @@ app.controller( 'MainCtrl', function( $scope, $http, $rootScope ) {
     }
 
     $rootScope.actualPage += 1;
-
-    if ( $rootScope.pop_shots === undefined || $rootScope.pop_shots.length === 0 ) {
-      $rootScope.pop_shots = [];
-    }
 
     $http({
       method: 'GET',
@@ -52,7 +52,10 @@ app.controller( 'MainCtrl', function( $scope, $http, $rootScope ) {
     });
   }
 
-  $scope.listShots();
+  if ( $rootScope.pop_shots.length === 0 ) {
+    $scope.listShots();
+  }
+  
 });
 
 app.controller( 'SecondCtrl', function( $scope, $http, $routeParams, $rootScope ) {
