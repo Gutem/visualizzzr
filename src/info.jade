@@ -1,0 +1,21 @@
+section#info
+    .shot
+        img( src="{{ shot.images.normal }}" )
+        .shot__info
+            .shot__title {{ shot.title }}
+        .shot__stats
+            .shot__views 
+                span Views: {{ shot.views_count }}
+            .shot__likes 
+                span Likes: {{ shot.likes_count }}
+        .shot__description 
+            p( ng-bind-html='shot.description')
+
+    .author
+        .author__avatar
+            img( src='{{ shot.user.avatar_url }}' )
+        .author__description
+            p.author__name {{ shot.user.name }}
+            p.author__username {{ shot.user.username}}
+            p.author__location {{ shot.user.location }}
+            p.author__bio( ng-bind-html='shot.user.bio')
