@@ -1,37 +1,193 @@
+@charset "utf-8";
+/*******************************************************************************
+    CONTENTS
+*******************************************************************************/
+/*
+
+    NOTES           General notes
+    PROJECT INFO    Information about the Project
+    RESET           CSS reset/normalize
+    VARIABLES       Sass Variables and Mixins
+    IMPORTS         External/Vendors CSS Frameworks/Libraries
+    FONTS           Customs Fonts that aren't from Google Fonts
+    SHARED          Shared elements across the site.
+    MAIN            Specific blocks: Header, Features, etc.
+    SMALL_DEVICES   Media queries for Small Devices
+    MEDIUM_DEVICES  Media queries for Medium Devices
+    LARGE_DEVICES   Media queries for Large Devices
+*/
+
+/*******************************************************************************
+    $NOTES
+*******************************************************************************/
+/*
+    How to seach this file:
+    append '$' to the desired above section to go straight to it.
+*/
+
+/*******************************************************************************
+    $PROJECT INFO
+*******************************************************************************/
+/*
+    Project: Zazcar Frontend Test
+    Developer: Gutem <gutemhc@gmail.com>
+    Contact: Ken <rh@zazcar.com.br>
+*/
+
+/*******************************************************************************
+    $RESET
+*******************************************************************************/
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+h2, h3 {
+  text-transform: uppercase;
+}
+
+h2, h3, p {
+  color: #7D7887;
+}
+
+p {
+  margin: 0 0 7px;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*******************************************************************************
+    $VARIABLES
+*******************************************************************************/
+
+/*******************************************************************************
+    $IMPORT
+*******************************************************************************/
+
+/*******************************************************************************
+    $FONTs 
+*******************************************************************************/
+
+/*******************************************************************************
+    $SHARED 
+*******************************************************************************/
+ 
 /*******************************************************************************
     $MOBILE FIRST
 *******************************************************************************/
-body {
-  background-color: #1c181f;
-  font: 16px/20px normal Helvetica, Arial, sans-serif;
+* {
+  box-sizing: border-box;
 }
 
+body {
+  font: 16px/22px normal Helvetica, Arial, sans-serif;
+}
+
+.container {
+  padding: 15px;
+}
+
+// Main Page
 #main {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
+
+  .shot {
+    float: left;
+    width: 98%;
+    padding: 10px;
+    margin: 1%;
+    background-color: #eee;
+  }
+}
+
+p {
+  float: left;
+  width: 100%;
+}
+
+// Shot Page
+#info {
+
+  .author{
+
+    &__avatar,
+    &__description {
+      float: left;
+    }
+
+    &__avatar {
+      width: 20%;
+
+      img {
+        border-radius: 50%;
+      }
+    }
+
+    &__description {
+      width: 75%;
+    }
+  }
+}
+
+.shot {
+
+  &__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } 
+
+  &__info,
+  &__stats,
+  &__description {
+    width: 100%;
+    margin: 10px 0;
+    float: left;
+  }
+
+  &__views {
+    float: left;
+  }
+
+  &__likes {
+    float: right;
+  }
+}
+
+.author {
+  margin-bottom: 30px;
+  
+  &__description {
+    padding-left: 15px;
+  }
 }
 
 img {
-  width: 100%;
   float: left;
-  margin: 10px 0;
+  width: 100%;
 }
 
-span {
-  margin-left: 5%;
-  width: 90%;
-  margin: 15px auto;
-  border: 1px solid #eee;
-  border-radius: 3px;
+button {
+  width: 100%;
+  margin: 15px 0;
   padding: 7px 0;
   float: left;
   cursor: pointer;
-  color: #eee;
+  color: #000;
+  border: none;
+  background-color: #eee;
   text-align: center;
+  background-color: transparent;
+  text-transform: uppercase;
 
   &:hover {
     color: #000;
-    border-color: #000;
     background-color: #eee;
   }
 }
@@ -40,29 +196,106 @@ span {
 /*******************************************************************************
     $SMALL DEVICES
 *******************************************************************************/
-@media screen and (min-width: 769px) and (max-width: 992px) {
+@media screen and ( min-width: 769px ) and ( max-width: 992px ) {
   .container { 
     width: 750px; 
     margin: 0 auto;
+  }
+
+  #main {
+    .shot {
+      width: 31%;
+    }
+  }
+
+  #info {
+
+    .shot {
+
+      &__info {
+        float: left;
+        width: 75%;
+      }
+      &__stats {
+        float: right;
+        width: 25%; 
+      }
+    }
   }
 }
 
 /*******************************************************************************
     $MEDIUM DEVICES
 *******************************************************************************/
-@media screen and (min-width: 993px) and (max-width: 1199px) {
+@media screen and ( min-width: 993px ) and ( max-width: 1199px ) {
   .container { 
     width: 970px; 
     margin: 0 auto;
+  }
+
+  #main {
+    .shot {
+      width: 31%;
+    }
+  }
+
+  #info {
+
+    .shot {
+
+      &__info {
+        float: left;
+        width: 75%;
+      }
+      &__stats {
+        float: right;
+        width: 25%; 
+      }
+    }
+
+    .author{
+
+      &__avatar {
+        width: 15%;
+      }
+    }
   }
 }
 
 /*******************************************************************************
     $LARGE DEVICES
 *******************************************************************************/
-@media screen and (min-width: 1200px) {
+@media screen and ( min-width: 1200px ) {
   .container {
     width: 1170px; 
     margin: 0 auto;
+  }
+
+  #main {
+    .shot {
+      width: 23%;
+    }
+  }
+
+  #info {
+
+    .shot {
+
+      &__info {
+        float: left;
+        width: 75%;
+      }
+      &__stats {
+        float: right;
+        width: 25%; 
+      }
+    }
+
+    .author{
+
+      &__avatar {
+        width: 10%;
+      }
+    }
   }
 }
