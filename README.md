@@ -1,8 +1,11 @@
-### Fetch API Demo
+### Visualizzzr
 
 Dependencies:  
  * Nodejs  
  * NPM
+
+#### TL;DR;
+`gulp` or `gulp build`
 
 #### Building
 First of all, you have to execute this command at your _Terminal_:
@@ -42,7 +45,7 @@ This task copies all custom Fonts files to it's assets's folder at dist's folder
 
 ##### Jade
 ```
-gulp haml
+gulp jade
 ```
 This task compiles Jade files and copy 'em to assets's folder at dist's folder.
 
@@ -52,24 +55,22 @@ gulp images
 ```
 This task optimizes Images files and copy 'em to it's assets's folder at dist's folder.
 
+##### Vendor
+```
+gulp vendor
+```
+This task copies Vendor's files to dist's folder.
+
 ##### Build
 ```
 gulp build
 ```
 Run all above tasks in the order showned above.
 
+Obs.: `gulp` fallbacks to this task as default.
+
 ##### Watch
 ```
 gulp watch
 ```
-The `watch` task run all the tasks, as the `build` task, but keeps listen to changes on the files, running the related task, i.e. if the changes are in the HAML file, it will run only the HAML task, and run the special task `browserSync` that will reload the browser and inject the changes without Developer interaction.
-
-
-##### Tests
-```
-gulp ui-tests
-```
-I forked this from others projects that I made.  
-This simples script uses PhantomJS and CasperJS to test if the site is up and running with correct URL and Page's title. 
-After that, it tests some _User Interface_ elements as header and footer's links.  
-To test locally, you need `gulp watch` in one Terminal's tab and run this command in another tab.
+The `watch` task run all the tasks, as the `build` task, but keeps listen to changes on the files, running the related task, i.e. if the changes are in the Jade file, it will run only the Jade task, and run the special task `browserSync` that will reload the browser and inject the changes without Developer interaction.
